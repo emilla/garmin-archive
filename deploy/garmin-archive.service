@@ -1,0 +1,12 @@
+[Unit]
+Description=Archive Garmin Connect data into PostgreSQL
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+# DATABASE_URL and optional GARMIN_ARCHIVE_* settings.
+EnvironmentFile=/etc/garmin-archive.env
+ExecStart=/opt/garmin-archive/.venv/bin/garmin-archive sync
+TimeoutStartSec=3h
+Nice=10
